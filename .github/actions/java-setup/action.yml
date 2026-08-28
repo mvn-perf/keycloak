@@ -20,3 +20,10 @@ runs:
       with:
         distribution: ${{ inputs.distribution }}
         java-version: ${{ inputs.java-version }}
+
+    # Every Maven invocation in this repository loads the mvn-lens core extension declared in
+    # .mvn/extensions.xml, so the extension has to be resolved here, in the one step every job
+    # running Maven goes through, rather than job by job. It needs the JDK set up above.
+    - id: setup-mvn-lens
+      name: Setup mvn-lens
+      uses: ./.github/actions/mvn-lens-setup
