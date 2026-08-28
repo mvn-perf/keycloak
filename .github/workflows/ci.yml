@@ -27,6 +27,7 @@ defaults:
 
 permissions:
   contents: read
+  actions: read   # lets the mvn-lens attach steps resolve the job and step they run in
 
 jobs:
   # Generate version compatibility matrix in a separate job to avoid multiline secret masking issues.
@@ -121,14 +122,13 @@ jobs:
         uses: ./.github/actions/build-keycloak
 
       # mvn-lens writes the report when the Maven session ends, a failed one included, which is
-      # exactly the build worth looking at - hence always(). Archived here, before Spotless, so
+      # exactly the build worth looking at - hence always(). Attached here, before Spotless, so
       # the report is the one of the Keycloak build rather than of the Spotless check.
-      - name: Archive the mvn-lens build report
+      - name: Attach the mvn-lens build report
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: mvn-perf/build-dashboard/mvn-lens@b6e31a0b651bd80809f578885f0e86db2c6522bd # main, no release tag yet
         with:
-          name: mvn-lens-build
-          path: target/mvnlens/report.html
+          step-name: Build Keycloak
 
       - name: Spotless
         run: ./mvnw -Pdocs,distribution,operator spotless:check
@@ -153,12 +153,11 @@ jobs:
         run: |
           ./mvnw test -am -pl "$(.github/scripts/find-modules-with-unit-tests.sh)"
 
-      - name: Archive the mvn-lens Base UT report
+      - name: Attach the mvn-lens Base UT report
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: mvn-perf/build-dashboard/mvn-lens@b6e31a0b651bd80809f578885f0e86db2c6522bd # main, no release tag yet
         with:
-          name: mvn-lens-base-UT
-          path: target/mvnlens/report.html
+          step-name: Run unit tests
 
   base-integration-tests:
     name: Base IT
@@ -182,13 +181,13 @@ jobs:
           echo "Tests: $TESTS"
           ./mvnw test ${{ env.SUREFIRE_RETRY }} -Pauth-server-quarkus -Dtest=$TESTS -pl testsuite/integration-arquillian/tests/base 2>&1 | misc/log/trimmer.sh
 
-      # One artifact per matrix group: upload-artifact rejects a name already used in the run.
-      - name: Archive the mvn-lens Base IT report
+      # The label keeps the six matrix groups apart as six series on the dashboard.
+      - name: Attach the mvn-lens Base IT report
         if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+        uses: mvn-perf/build-dashboard/mvn-lens@b6e31a0b651bd80809f578885f0e86db2c6522bd # main, no release tag yet
         with:
-          name: mvn-lens-base-IT-${{ matrix.group }}
-          path: target/mvnlens/report.html
+          step-name: Run base tests
+          label: group ${{ matrix.group }}
 
       - uses: ./.github/actions/upload-flaky-tests
         name: Upload flaky tests

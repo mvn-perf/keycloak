@@ -1,0 +1,50 @@
+name: Build dashboard
+
+# Publishes an HTML dashboard of this repository's GitHub Actions builds - run durations
+# over time, step durations per job, a timeline per run, and the Maven build-time trend of
+# every mvn-lens report attached by the CI workflow - to the gh-pages branch, served at
+# https://mvn-perf.github.io/keycloak/.
+#
+# One-time repository setup: Settings -> Pages -> Build and deployment -> Source: "Deploy
+# from a branch", Branch: gh-pages / (root). The first run of this workflow creates the
+# branch. Both triggers below only fire once this file is on the default branch.
+
+on:
+  workflow_run:
+    workflows: ['Keycloak CI']
+    types: [completed]
+  schedule:
+    - cron: '17 3 * * *'   # catch-up: runs the triggers missed, pruning, expired artifacts
+  workflow_dispatch:
+    inputs:
+      force-refresh:
+        description: Re-fetch every run in range instead of only the new ones
+        type: boolean
+        default: false
+
+permissions:
+  actions: read      # list runs, jobs and artifacts; download the mvn-lens report artifacts
+  contents: write    # push the site to gh-pages
+
+# The site is a single branch - never publish twice at the same time.
+concurrency:
+  group: build-dashboard
+  cancel-in-progress: false
+
+jobs:
+  dashboard:
+    name: Build dashboard
+    runs-on: ubuntu-latest
+    steps:
+      - id: dashboard
+        name: Build and publish the dashboard
+        uses: mvn-perf/build-dashboard@b6e31a0b651bd80809f578885f0e86db2c6522bd # main, no release tag yet
+        with:
+          # workflows: ci.yml            # default: every workflow of the repository
+          keep-reports: 60               # runs per workflow whose mvn-lens report HTML stays on the site
+          publish-branch: gh-pages
+          force-refresh: ${{ inputs.force-refresh || false }}
+
+      - name: Summary
+        run: |
+          echo "Dashboard: ${{ steps.dashboard.outputs.site-url }} (${{ steps.dashboard.outputs.runs-total }} runs, ${{ steps.dashboard.outputs.reports-collected }} mvn-lens reports)"
