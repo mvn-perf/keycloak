@@ -1,0 +1,20 @@
+name: Setup mvn-lens
+description: Pre-resolves the mvn-lens core extension so that later Maven invocations can load it
+
+runs:
+  using: composite
+  steps:
+    # Must come before any Maven invocation rooted at the checkout, the wrapper included:
+    # Maven loads the core extensions listed in .mvn/extensions.xml before it reads pom.xml,
+    # resolving them from settings.xml only, so the Maven Central snapshot repository serving
+    # mvn-lens cannot be declared in pom.xml. Building .mvn/pom.xml downloads the extension
+    # into the local repository, where every later invocation finds it. See .mvn/pom.xml.
+    #
+    # Uses the Maven installed on the runner rather than ./mvnw on purpose: the wrapper looks
+    # for its own properties under the multi-module project directory, which is .mvn here (see
+    # .mvn/pom.xml on why this runs from .mvn), where there are none.
+    - id: pre-resolve-mvn-lens
+      name: Pre-resolve the mvn-lens extension
+      shell: bash
+      working-directory: .mvn
+      run: mvn --batch-mode --errors --no-transfer-progress --update-snapshots dependency:resolve
