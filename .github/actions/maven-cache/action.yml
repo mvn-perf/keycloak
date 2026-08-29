@@ -30,6 +30,7 @@ runs:
           ~/.m2/repository/*/*
           ~/.m2/wrapper/dists
           !~/.m2/repository/org/keycloak
+          !~/.m2/repository/io/github/mvn-perf
         key: mvn-and-wrapper-${{ runner.os }}-${{ steps.weekly-cache-key.outputs.key }}
 
     - id: restore-maven-repository
@@ -42,6 +43,7 @@ runs:
           ~/.m2/repository/*/*
           ~/.m2/wrapper/dists
           !~/.m2/repository/org/keycloak
+          !~/.m2/repository/io/github/mvn-perf
         key: mvn-and-wrapper-${{ runner.os }}-${{ steps.weekly-cache-key.outputs.key }}
 
     - id: node-cache
