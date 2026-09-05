@@ -111,8 +111,13 @@ jobs:
     if: needs.conditional.outputs.ci == 'true'
     runs-on: ubuntu-latest
     needs: conditional
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the write token out of .git/config
 
       - name: Check base testsuites
         run: tests/base/check-base-suites.sh
@@ -121,14 +126,14 @@ jobs:
         uses: ./.github/actions/build-keycloak
 
       # mvn-lens writes the report when the Maven session ends, a failed one included, which is
-      # exactly the build worth looking at - hence always(). Archived here, before Spotless, so
-      # the report is the one of the Keycloak build rather than of the Spotless check.
-      - name: Archive the mvn-lens build report
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # exactly the build worth looking at - hence !cancelled(). Published here, before Spotless,
+      # so the report is the one of the Keycloak build rather than of the Spotless check. It is
+      # committed to the monitoring inbox branch (no artifact) and linked from the job summary.
+      - name: Publish the mvn-lens build report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: mvn-lens-build
-          path: target/mvnlens/report.html
+          job-name: Build
 
       - name: Spotless
         run: ./mvnw -Pdocs,distribution,operator spotless:check
@@ -142,8 +147,13 @@ jobs:
     runs-on: ubuntu-latest
     needs: build
     timeout-minutes: 30
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the write token out of .git/config
 
       - id: unit-test-setup
         name: Unit test setup
@@ -153,24 +163,29 @@ jobs:
         run: |
           ./mvnw test -am -pl "$(.github/scripts/find-modules-with-unit-tests.sh)"
 
-      - name: Archive the mvn-lens Base UT report
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Committed to the monitoring inbox branch (no artifact), see the Build job.
+      - name: Publish the mvn-lens Base UT report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: mvn-lens-base-UT
-          path: target/mvnlens/report.html
+          job-name: Base UT
 
   base-integration-tests:
     name: Base IT
     needs: build
     runs-on: ubuntu-latest
     timeout-minutes: 100
+    permissions:
+      contents: write   # build-monitor/report commits the mvn-lens report to the inbox branch
+      actions: read     # ... and identifies its own job/step through the Jobs API
     strategy:
       matrix:
         group: [1, 2, 3, 4, 5, 6]
       fail-fast: false
     steps:
       - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+        with:
+          persist-credentials: false   # keep the write token out of .git/config
 
       - id: integration-test-setup
         name: Integration test setup
@@ -182,13 +197,13 @@ jobs:
           echo "Tests: $TESTS"
           ./mvnw test ${{ env.SUREFIRE_RETRY }} -Pauth-server-quarkus -Dtest=$TESTS -pl testsuite/integration-arquillian/tests/base 2>&1 | misc/log/trimmer.sh
 
-      # One artifact per matrix group: upload-artifact rejects a name already used in the run.
-      - name: Archive the mvn-lens Base IT report
-        if: always()
-        uses: actions/upload-artifact@043fb46d1a93c77aae656e7c1c64a875d1fc6a0a # v7.0.1
+      # Committed to the monitoring inbox branch (no artifact), see the Build job. The matrix
+      # group is part of the job's display name, which is what attributes the report.
+      - name: Publish the mvn-lens Base IT report
+        if: ${{ !cancelled() }}
+        uses: mvn-perf/build-monitor/report@main
         with:
-          name: mvn-lens-base-IT-${{ matrix.group }}
-          path: target/mvnlens/report.html
+          job-name: Base IT (${{ matrix.group }})
 
       - uses: ./.github/actions/upload-flaky-tests
         name: Upload flaky tests
@@ -1438,3 +1453,21 @@ jobs:
       - uses: ./.github/actions/status-check
         with:
           jobs: ${{ toJSON(needs) }}
+
+  # Every mvn-lens report of this run is one click away from the step that produced it, on the
+  # monitoring page published by .github/workflows/build-monitor.yml.
+  # https://github.com/mvn-perf/build-monitor
+  monitoring:
+    name: Build monitoring
+    needs:
+      - build
+      - unit-tests
+      - base-integration-tests
+    if: ${{ !cancelled() }}
+    runs-on: ubuntu-latest
+    permissions:
+      actions: read
+      contents: read
+    steps:
+      - name: Link the monitoring page from the run summary
+        uses: mvn-perf/build-monitor/summary@main
