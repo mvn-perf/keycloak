@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/keycloak",
+  "serverUrl": "https://github.com",
+  "runId": 33985941006,
+  "runNumber": 10,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/keycloak/.github/workflows/ci.yml@refs/heads/ci/build-monitor",
+  "jobKey": "unit-tests",
+  "jobId": 101360511047,
+  "jobName": "Base UT",
+  "jobUrl": "https://github.com/mvn-perf/keycloak/actions/runs/33985941006/job/101360511047",
+  "runnerName": "GitHub Actions 1000001810",
+  "stepNumber": 4,
+  "stepName": "Run unit tests",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101360511047-s4",
+  "collectedAt": "2026-09-05T19:21:03.524Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "org.keycloak",
+        "artifactId": "keycloak-parent",
+        "version": "999.0.0-SNAPSHOT",
+        "goals": [
+          "test"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788635938686,
+        "endedAt": 1788636060272,
+        "totalMs": 122927,
+        "wallMs": 121586,
+        "cpuMs": 67812,
+        "gcMs": 2123,
+        "gcCount": 128,
+        "jitMs": 48205,
+        "c2Ms": 48205,
+        "downloadMs": 2225,
+        "downloadBytes": 753627,
+        "downloadCount": 17,
+        "moduleCount": 41,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "org.keycloak:keycloak-services:999.0.0-SNAPSHOT",
+          "durationMs": 13894
+        },
+        "slowestTest": {
+          "className": "org.keycloak.crypto.fips.test.mdoc.FIPS1402MdocKeyBindingTest",
+          "methodName": "testRSA4096KeyBinding",
+          "displayName": "testRSA4096KeyBinding(org.keycloak.crypto.fips.test.mdoc.FIPS1402MdocKeyBindingTest)",
+          "framework": "JUNIT4",
+          "durationMs": 6018
+        },
+        "testCount": 30,
+        "testMs": 22319,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 2,
+          "cpuThreads": 4,
+          "memoryBytes": 16765374464,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2135187
+    }
+  ]
+}

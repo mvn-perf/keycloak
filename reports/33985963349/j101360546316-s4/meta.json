@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/keycloak",
+  "serverUrl": "https://github.com",
+  "runId": 33985963349,
+  "runNumber": 11,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/keycloak/.github/workflows/ci.yml@refs/pull/3/merge",
+  "jobKey": "base-integration-tests",
+  "jobId": 101360546316,
+  "jobName": "Base IT (6)",
+  "jobUrl": "https://github.com/mvn-perf/keycloak/actions/runs/33985963349/job/101360546316",
+  "runnerName": "GitHub Actions 1000001844",
+  "stepNumber": 4,
+  "stepName": "Run base tests",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101360546316-s4",
+  "collectedAt": "2026-09-05T20:12:52.174Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "org.keycloak.testsuite",
+        "artifactId": "integration-arquillian-tests-base",
+        "version": "999.0.0-SNAPSHOT",
+        "goals": [
+          "test"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788637379907,
+        "endedAt": 1788639167843,
+        "totalMs": 1788806,
+        "wallMs": 1787936,
+        "cpuMs": 54257,
+        "gcMs": 1735,
+        "gcCount": 150,
+        "jitMs": 36353,
+        "c2Ms": 36353,
+        "downloadMs": 1481,
+        "downloadBytes": 1123336,
+        "downloadCount": 15,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "org.keycloak.testsuite:integration-arquillian-tests-base:999.0.0-SNAPSHOT",
+          "durationMs": 1769579
+        },
+        "slowestTest": {
+          "className": "org.keycloak.testsuite.script.UndeployedScriptMapperNotAvailableTest",
+          "methodName": "testMapperNotRecognizedWhenDisabled",
+          "displayName": "testMapperNotRecognizedWhenDisabled",
+          "framework": "VINTAGE",
+          "durationMs": 43216
+        },
+        "testCount": 10,
+        "testMs": 145543,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 2,
+          "cpuThreads": 4,
+          "memoryBytes": 16765374464,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2475068
+    }
+  ]
+}
