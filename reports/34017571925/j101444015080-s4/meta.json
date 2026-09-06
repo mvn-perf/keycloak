@@ -1,0 +1,83 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/keycloak",
+  "serverUrl": "https://github.com",
+  "runId": 34017571925,
+  "runNumber": 12,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/keycloak/.github/workflows/ci.yml@refs/heads/main",
+  "jobKey": "build",
+  "jobId": 101444015080,
+  "jobName": "Build",
+  "jobUrl": "https://github.com/mvn-perf/keycloak/actions/runs/34017571925/job/101444015080",
+  "runnerName": "GitHub Actions 1000002033",
+  "stepNumber": 4,
+  "stepName": "Build Keycloak",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101444015080-s4",
+  "collectedAt": "2026-09-06T06:57:23.803Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "org.keycloak.bom",
+        "artifactId": "keycloak-bom-parent",
+        "version": "999.0.0-SNAPSHOT",
+        "goals": [
+          "install",
+          "dependency:resolve"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788677533019,
+        "endedAt": 1788677826729,
+        "totalMs": 294059,
+        "wallMs": 293709,
+        "cpuMs": 104915,
+        "gcMs": 4146,
+        "gcCount": 196,
+        "jitMs": 82474,
+        "c2Ms": 82340,
+        "downloadMs": 634718,
+        "downloadBytes": 517006705,
+        "downloadCount": 3929,
+        "moduleCount": 152,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-dependency-plugin",
+          "goal": "resolve",
+          "phase": null,
+          "executionId": "default-cli",
+          "moduleKey": "org.keycloak.bom:keycloak-bom-parent:999.0.0-SNAPSHOT",
+          "durationMs": 20554
+        },
+        "slowestTest": null,
+        "testCount": 0,
+        "testMs": 0,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2210576
+    }
+  ]
+}

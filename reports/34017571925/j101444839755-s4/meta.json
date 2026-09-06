@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/keycloak",
+  "serverUrl": "https://github.com",
+  "runId": 34017571925,
+  "runNumber": 12,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/keycloak/.github/workflows/ci.yml@refs/heads/main",
+  "jobKey": "unit-tests",
+  "jobId": 101444839755,
+  "jobName": "Base UT",
+  "jobUrl": "https://github.com/mvn-perf/keycloak/actions/runs/34017571925/job/101444839755",
+  "runnerName": "GitHub Actions 1000002061",
+  "stepNumber": 4,
+  "stepName": "Run unit tests",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101444839755-s4",
+  "collectedAt": "2026-09-06T07:01:08.522Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "org.keycloak",
+        "artifactId": "keycloak-parent",
+        "version": "999.0.0-SNAPSHOT",
+        "goals": [
+          "test"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788677934025,
+        "endedAt": 1788678064765,
+        "totalMs": 132032,
+        "wallMs": 130740,
+        "cpuMs": 70903,
+        "gcMs": 1982,
+        "gcCount": 121,
+        "jitMs": 49593,
+        "c2Ms": 49593,
+        "downloadMs": 2150,
+        "downloadBytes": 753627,
+        "downloadCount": 17,
+        "moduleCount": 41,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "org.keycloak:keycloak-crypto-elytron:999.0.0-SNAPSHOT",
+          "durationMs": 15570
+        },
+        "slowestTest": {
+          "className": "org.keycloak.crypto.def.test.mdoc.DefaultCryptoMdocKeyBindingTest",
+          "methodName": "testRSA4096KeyBinding",
+          "displayName": "testRSA4096KeyBinding(org.keycloak.crypto.def.test.mdoc.DefaultCryptoMdocKeyBindingTest)",
+          "framework": "JUNIT4",
+          "durationMs": 2886
+        },
+        "testCount": 30,
+        "testMs": 22375,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16766414848,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2139350
+    }
+  ]
+}

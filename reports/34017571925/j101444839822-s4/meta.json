@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/keycloak",
+  "serverUrl": "https://github.com",
+  "runId": 34017571925,
+  "runNumber": 12,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/keycloak/.github/workflows/ci.yml@refs/heads/main",
+  "jobKey": "base-integration-tests",
+  "jobId": 101444839822,
+  "jobName": "Base IT (1)",
+  "jobUrl": "https://github.com/mvn-perf/keycloak/actions/runs/34017571925/job/101444839822",
+  "runnerName": "GitHub Actions 1000002074",
+  "stepNumber": 4,
+  "stepName": "Run base tests",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101444839822-s4",
+  "collectedAt": "2026-09-06T07:09:03.829Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "org.keycloak.testsuite",
+        "artifactId": "integration-arquillian-tests-base",
+        "version": "999.0.0-SNAPSHOT",
+        "goals": [
+          "test"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788677942096,
+        "endedAt": 1788678538728,
+        "totalMs": 597461,
+        "wallMs": 596632,
+        "cpuMs": 37309,
+        "gcMs": 4070,
+        "gcCount": 73,
+        "jitMs": 32588,
+        "c2Ms": 32588,
+        "downloadMs": 1887,
+        "downloadBytes": 1123336,
+        "downloadCount": 15,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "org.keycloak.testsuite:integration-arquillian-tests-base:999.0.0-SNAPSHOT",
+          "durationMs": 574841
+        },
+        "slowestTest": {
+          "className": "org.keycloak.testsuite.actions.RequiredActionEmailVerificationTest",
+          "methodName": "verifyEmailFromAnotherAccountWhenUserIsAuthenticated",
+          "displayName": "verifyEmailFromAnotherAccountWhenUserIsAuthenticated",
+          "framework": "VINTAGE",
+          "durationMs": 12547
+        },
+        "testCount": 10,
+        "testMs": 77134,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 2,
+          "cpuThreads": 4,
+          "memoryBytes": 16765378560,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 1871456
+    }
+  ]
+}

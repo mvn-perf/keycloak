@@ -1,0 +1,88 @@
+{
+  "schemaVersion": 1,
+  "repository": "mvn-perf/keycloak",
+  "serverUrl": "https://github.com",
+  "runId": 34017571925,
+  "runNumber": 12,
+  "runAttempt": 1,
+  "workflowRef": "mvn-perf/keycloak/.github/workflows/ci.yml@refs/heads/main",
+  "jobKey": "base-integration-tests",
+  "jobId": 101444839766,
+  "jobName": "Base IT (3)",
+  "jobUrl": "https://github.com/mvn-perf/keycloak/actions/runs/34017571925/job/101444839766",
+  "runnerName": "GitHub Actions 1000002063",
+  "stepNumber": 4,
+  "stepName": "Run base tests",
+  "stepResolution": "job-name/report-time",
+  "label": null,
+  "key": "j101444839766-s4",
+  "collectedAt": "2026-09-06T07:38:11.915Z",
+  "reports": [
+    {
+      "file": "report.html",
+      "originalPath": "target/mvnlens/report.html",
+      "label": null,
+      "summary": {
+        "schemaVersion": 1,
+        "groupId": "org.keycloak.testsuite",
+        "artifactId": "integration-arquillian-tests-base",
+        "version": "999.0.0-SNAPSHOT",
+        "goals": [
+          "test"
+        ],
+        "threads": 1,
+        "builderId": "singlethreaded",
+        "mavenVersion": "3.9.16",
+        "jdkVersion": "25.0.4.1",
+        "status": "OK",
+        "startedAt": 1788677929821,
+        "endedAt": 1788680287628,
+        "totalMs": 2358741,
+        "wallMs": 2357807,
+        "cpuMs": 56827,
+        "gcMs": 1909,
+        "gcCount": 108,
+        "jitMs": 44811,
+        "c2Ms": 44811,
+        "downloadMs": 1414,
+        "downloadBytes": 1123336,
+        "downloadCount": 15,
+        "moduleCount": 1,
+        "slowestMojo": {
+          "plugin": "org.apache.maven.plugins:maven-surefire-plugin",
+          "goal": "test",
+          "phase": "test",
+          "executionId": "default-test",
+          "moduleKey": "org.keycloak.testsuite:integration-arquillian-tests-base:999.0.0-SNAPSHOT",
+          "durationMs": 2333540
+        },
+        "slowestTest": {
+          "className": "org.keycloak.testsuite.organization.exportimport.OrganizationExportTest",
+          "methodName": "testExport",
+          "displayName": "testExport",
+          "framework": "VINTAGE",
+          "durationMs": 59066
+        },
+        "testCount": 10,
+        "testMs": 269226,
+        "issueCount": 0,
+        "issueSeverities": {},
+        "environment": {
+          "availableProcessors": 4,
+          "cpuCores": 16,
+          "cpuThreads": 4,
+          "memoryBytes": 16770797568,
+          "osName": "DISTRIB_ID=Ubuntu",
+          "jvmName": "OpenJDK 64-Bit Server VM",
+          "jvmVendor": "Eclipse Adoptium",
+          "mvnd": false,
+          "githubActions": true,
+          "c2DisabledBy": null
+        }
+      },
+      "summarySource": "html",
+      "compressed": false,
+      "bytes": 2509608
+    }
+  ]
+}
